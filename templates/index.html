@@ -1,0 +1,150 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container">
+
+       <div style="padding-top: 5%;">
+
+           <div id="thebody">
+        <div class="card" id="pilih" style="width: 18rem; margin-left: auto; margin-right: auto;">
+          <div class="card-body">
+            <h5 class="card-title">Pilih tanggal</h5>
+            <p class="card-text">Mau sampai kapan Anda hidup normal?</p>
+            <form class="from-inline">
+              <div class="form-group">
+                <input required="1" class="form-control" type="date" id="date" placeholder="Date">
+              </div>
+                <button class="btn btn-dark float-right" type="submit"> Ok </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card" id="hasil" style="width: 18rem; margin-left: auto; margin-right: auto; display: none;">
+          <div class="card-body">
+            <h5 class="card-title" id="yeay">Yeaaay..</h5>
+            <p class="card-text">Anda tidak akan membuka akun media sosial sampai tanggal
+            <strong><span id="t">ttt</span></strong>, apabila mengikuti langkah-langkah berikut! </p>
+            <button class="btn btn-dark float-right" id="btnhasil">Next</button>
+          </div>
+        </div>
+
+        <div class="card" id="langkah1" style="width: 18rem; margin-left: auto; margin-right: auto; display: none;">
+          <div class="card-body">
+            <div class="form-group">
+                <p class="card-text text-muted">1. Ganti password akun anda dengan password di bawah ini:</p>
+            <input id="password" class="form-control" type="text" readonly>
+            </div>
+              <button class="btn btn-dark" id="btnlangkah1back">Back</button>
+              <button class="btn btn-dark float-right" id="btnlangkah1">Next</button>
+          </div>
+        </div>
+
+        <div class="card" id="langkah2" style="width: 18rem; margin-left: auto; margin-right: auto; display: none;">
+          <div class="card-body">
+            <div class="form-group">
+                <p class="card-text text-muted">2. Ganti email akun anda dengan email di bawah ini:</p>
+            <input id="email" class="form-control" type="text" readonly>
+            </div>
+              <button class="btn btn-dark" id="btnlangkah2back">Back</button>
+              <button class="btn btn-dark float-right" id="btnlangkah2">Next</button>
+          </div>
+        </div>
+
+        <div class="card" id="langkah3" style="width: 18rem; margin-left: auto; margin-right: auto; display: none;">
+          <div class="card-body">
+            <div class="form-group">
+            <p class="card-text text-muted">2. Setelah password akun
+                Anda sudah diganti silahkan logout dari akun anda, lalu salin dan simpan kode di bawah ini, misal di aplikasi note pada
+                handphone anda atau dimanapun menurut anda aman dan jangan sampai terhapus:</p>
+            <input id="code" class="form-control" type="text" readonly>
+            </div>
+            <p class="card-text text-muted">Password bisa dilihat kembali melalui menu status. <strong>
+                Selamat menjalani hidup normal!
+            </strong></p>
+              <button class="btn btn-dark" id="btnlangkah3back">Back</button>
+          </div>
+        </div>
+        </div>
+
+
+        <div class="card" id="iniapaan" style="width: 18rem; margin-left: auto; margin-right: auto; display: none;">
+          <div class="card-body">
+            <div class="form-group">
+            <p class="card-text">
+                Aplikasi ini dibuat dengan tujuan untuk membantu Anda menjauh dari akun media sosial
+                yang mulai mengganggu kegiatan di kehidupan normal Anda. Misal, Anda merasa mulai kecanduan
+                dan rasa kecanduan seperti tidak bisa lepas untuk memeriksa notifikasi membuat Anda susah
+                untuk berkonsentrasi dengan pekerjaan Anda. <br><br>
+                Cara kerja aplikasi ini adalah, pertama, Anda menentukan mau sampai kapan akan menjalani hidup normal
+                tanpa gangguan media sosial, lalu aplikasi akan memberikan Anda <em>random</em> password dan email yang susah diingat.
+                Anda akan diminta untuk mengganti password dan email yang sudah diberikan dan <em>logout</em>. Setelah selesai diganti, aplikasi
+                akan memberikan sebuah <strong>kode</strong> untuk Anda simpan. Dengan kode tersebut Anda bisa mendapatkan
+                password dan email Anda kembali melalui tombol status di bawah.
+                <br><br>
+                <strong>Aplikasi tidak menyimpan password Anda</strong>, melainkan Anda sendirilah yang menyimpannya,
+                karena password sebenarnya ada pada kode yang aplikasi berikan, hanya saja di-enkripsi supaya tidak
+                bisa dibaca.
+            </p>
+          </div>
+        </div>
+        </div>
+        <br>
+
+        <div class="card" style="width: 18rem; margin-left: auto; margin-right: auto;">
+          <div class="card-body">
+            <a href="{{url_for('status')}}" target="_blank" class="btn btn-outline-dark float-right"> Status </a>
+            <button class="btn btn-outline-dark" id="apaan"> Ini apaan? </button>
+            <button class="btn btn-dark" id="btnapaan" style="display: none;">Back</button>
+          </div>
+        </div>
+           <br>
+        <p style="width: 18rem; margin-left: auto; margin-right: auto; font-size: 80%;" class="text-center text-muted">Developed with <span style="color: red;">love</span>  by <a href="https://twitter.com/bitxt">Farhan</a></p>
+        </div>
+
+        <br>
+            <div id="successAlert" class="alert alert-success" role="alert" style="display:none;"></div>
+            <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
+        </div>
+    </div>
+    <script>
+        $('#btnhasil').click(function(){
+             $('#hasil').hide();
+             $('#langkah1').show();
+         });
+         $('#btnlangkah1').click(function(){
+             $('#langkah1').hide();
+             $('#langkah3').show();
+         });
+         $('#btnlangkah2').click(function(){
+             $('#langkah2').hide();
+             $('#langkah3').show();
+         });
+
+         $('#btnlangkah1back').click(function(){
+             $('#hasil').show();
+             $('#langkah1').hide();
+         });
+         $('#btnlangkah2back').click(function(){
+             $('#langkah1').show();
+             $('#langkah2').hide();
+         });
+         $('#btnlangkah3back').click(function(){
+             $('#langkah2').show();
+             $('#langkah3').hide();
+         });
+
+         $('#apaan').click(function(){
+             $(this).hide();
+             $('#thebody').hide();
+             $('#iniapaan').show();
+             $('#btnapaan').show();
+         });
+
+         $('#btnapaan').click(function(){
+             $(this).hide();
+             $('#thebody').show();
+             $('#iniapaan').hide();
+             $('#apaan').show();
+         });
+    </script>
+{% endblock %}

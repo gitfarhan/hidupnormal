@@ -1,0 +1,46 @@
+{% extends "layout_status.html" %}
+
+{% block content %}
+    <div class="container">
+
+        <div style="padding-top: 5%;">
+
+        <div class="card" style="width: 18rem; margin-left: auto; margin-right: auto;">
+          <div class="card-body">
+            <h5 class="card-title">Check Status</h5>
+            <p class="card-text">Silahkan masukan kode:</p>
+            <form class="from-inline">
+              <div class="form-group">
+                <input required="1" class="form-control" type="text" id="KodeInput" placeholder="Kode">
+              </div>
+                <button class="btn btn-dark float-right" type="submit"> check </button>
+            </form>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="card" id="notfinished" style="width: 18rem; margin-left: auto; margin-right: auto; display: none;">
+          <div class="card-body">
+            <h5 class="card-title">Sabar..</h5>
+            <p class="card-text">Anda masih harus melewati <strong><span id="total">total</span></strong> hari lagi tanpa
+            media sosial.</p>
+          </div>
+        </div>
+
+        <div class="card" id="finished" style="width: 18rem; margin-left: auto; margin-right: auto; display: none;">
+          <div class="card-body">
+            <h5 class="card-title">Selamat!</h5>
+            <p class="card-text">Anda sudah melewati hari tanpa akun media sosial selama hari
+            yang sudah Anda tentukan, berikut adalah password Anda:</p>
+                  <input type="text" class="form-control" id="password">
+          </div>
+        </div>
+        <br>
+        <p style="width: 18rem; margin-left: auto; margin-right: auto; font-size: 80%;" class="text-center text-muted">Developed with love by <a href="https://twitter.com/bitxt">Farhan</a> |
+            <a href="http://theinternetbae.sarahah.com">Feedback</a></p>
+
+
+        </div>
+    </div>
+{% endblock %}
