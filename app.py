@@ -186,11 +186,11 @@ class GetPassword(Resource):
 api.add_resource(GetPassword, '/get/<int:year>/<int:month>/<int:day>')
 api.add_resource(Encode, '/encode/<string:code>')
 
-# if __name__ == "__main__":
-#     app.run(debug=True, port=int(os.environ.get("PORT", 5000)), host='0.0.0.0')
-
 if __name__ == "__main__":
-    app.run(debug=True, port=3000)
-    # password = another_generator(10)
-    # print(password)
-    # print(len(password))
+    app.run(debug=True, port=int(os.environ.get("PORT", 5000)), host='0.0.0.0')
+
+# if __name__ == "__main__":
+#     app.run(debug=True, port=3000)
+#     # password = another_generator(10)
+#     # print(password)
+#     # print(len(password))
