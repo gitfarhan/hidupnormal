@@ -12,7 +12,8 @@ api = Api(app)
 
 
 def another_generator(length=8):
-    return str(uuid.uuid1()).join(random.choices(string.ascii_uppercase + string.digits, k=5)).replace("-","")[:length]
+    return str(uuid.uuid1()).join(random.choices(string.ascii_uppercase + string.digits, k=5)).replace("-", "")[:length]
+
 
 @app.route('/')
 def index():
@@ -25,11 +26,13 @@ def encrypt(message):
         result = result + chr(ord(message[i]) - 12)
     return result
 
+
 def decrypt(message):
     result = ''
     for i in range(0, len(message)):
         result = result + chr(ord(message[i]) + 12)
     return result
+
 
 @app.route('/insert', methods=['POST'])
 def insert():
@@ -57,26 +60,28 @@ def insert():
         fin = "{day}/{month}/{year}".format(day=day, month=month, year=year)
 
         result = jsonify({
-            'date' : fin,
-            'total' : total,
-            'password' : password,
-            'code' : code,
-            'enc' : enc
+            'date': fin,
+            'total': total,
+            'password': password,
+            'code': code,
+            'enc': enc
         })
 
         if total < 0:
             return jsonify({
-                'error' : 'Haha?'
+                'error': 'Haha?'
             })
         else:
             return result
 
     else:
-        return jsonify({'error' : 'Missing data'})
+        return jsonify({'error': 'Missing data'})
+
 
 @app.route('/status')
 def status():
     return render_template('status.html')
+
 
 @app.route('/process', methods=['POST'])
 def process():
@@ -99,18 +104,15 @@ def process():
 
         d0 = date(int(year), int(month), int(day))
         d1 = date(nowYear, nowMonth, nowDay)
-        delta = d0-d1
+        delta = d0 - d1
         total = delta.days
 
-        datecode = "{day}/{month}/{year}".format(day=day, month=month, year=year)
-        nowdate = "{day}/{month}/{year}".format(day=nowDay, month=nowMonth, year=nowYear)
-
         result_finished = jsonify({
-            'password' : password
+            'password': password
         })
 
         result_notfinished = jsonify({
-            'total' : total
+            'total': total
         })
 
         if total <= 0:
@@ -119,8 +121,9 @@ def process():
             return result_notfinished
     else:
         return jsonify({
-            "error" : "missing data"
+            "error": "missing data"
         })
+
 
 # hidup normal API
 
@@ -129,13 +132,13 @@ class Encode(Resource):
         url_data = urlsplit(code)
         dec = encrypt(url_data)
 
-        # memsiahkan hasil
+        # parsing
         day = dec[0:2]
         month = dec[2:4]
         year = dec[4:8]
         password = dec[8:]
 
-        # menghitung sisa hari
+        # counting remaining days
         now = datetime.now()
         nowYear = now.year
         nowMonth = now.month
@@ -147,11 +150,13 @@ class Encode(Resource):
         total = delta.days
 
         if total <= 0:
-            return {'password' : password}
+            return {'password': password}
         else:
-            return {'total' : total}
+            return {'total': total}
+
 
 class GetPassword(Resource):
+
     def get(self, year, month, day):
         password = another_generator(length=10)
         code = '{d}{m}{y}{p}'.format(d=day, m=month, y=year, p=password)
@@ -179,9 +184,10 @@ class GetPassword(Resource):
         }
 
         if total < 0:
-            return {'error' : 'haha?'}
+            return {'error': 'haha?'}
         else:
             return result
+
 
 api.add_resource(GetPassword, '/get/<int:year>/<int:month>/<int:day>')
 api.add_resource(Encode, '/encode/<string:code>')
